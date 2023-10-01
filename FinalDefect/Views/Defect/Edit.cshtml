@@ -1,0 +1,255 @@
+﻿@model FinalDefect.Models.DefectModel
+
+@{
+    ViewData["assign_to"] = new SelectList("id", "firstname");
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+
+
+
+<div class="page-wrapper">
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Defect</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item">Defect</li>
+
+            </ol>
+        </div>
+       
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card card-outline-info">
+                                    <div class="card-header">
+                                        <h4 class="m-b-0 text-white">DEFECT RECORDS MODIFICATION</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <form asp-action="Edit" class="form-horizontal form-bordered">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <div class="form-group row">
+                                                <label asp-for="id" class="control-label text-right col-md-3">Project ID</label>
+                                                <div class="col-md-9">
+                                                    <input asp-for="id" class="form-control" type="text" readonly />
+                                                    <span asp-validation-for="id" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label asp-for="project_name" class="control-label text-right col-md-3">Project Name</label>
+                                                <div class="col-md-9">
+                                                    <input asp-for="project_name" class="form-control" type="text" readonly />
+                                                    <span asp-validation-for="project_name" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label asp-for="description" class="control-label text-right col-md-3">Description</label>
+                                                <div class="col-md-9">
+                                                    <textarea asp-for="description" class="form-control" rows="6"></textarea>
+
+                                                    <span asp-validation-for="description" class="text-danger"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+
+                                                <label asp-for="status" class="control-label text-right col-md-3">Status</label>
+                                                <div class="col-md-9">
+                                                    @if (ViewBag.usertype == "Admin")
+                                                    {
+                                                    <select asp-for="status" class="form-control custom-select">
+                                                        <option value="New">New</option>
+
+                                                        <option value="Open">Open</option>
+                                                        <option value="Assigned">Assigned</option>
+                                                        <option value="Rejected">Rejected</option>
+                                                        <option value="Duplicate">Duplicate</option>
+                                                        <option value="Deferred">Deferred</option>
+                                                        <option value="Not Reproducible">Not Reproducible</option>
+                                                        <option value="Need more information">Need more information</option>
+                                                        <option value="Known defect">Known defect</option>
+                                                        <option value="Fixed">Fixed</option>
+                                                        <option value="Ready for Retest">Ready for Retest</option>
+                                                        <option value="Closed">Closed</option>
+
+
+                                                    </select>
+                                                    }
+                                                    else if (ViewBag.usertype == "Manager")
+                                                    {
+                                                        <select asp-for="status" class="form-control custom-select">
+                                                            <option value="New">New</option>
+
+                                                            <option value="Open">Open</option>
+                                                            <option value="Assigned">Assigned</option>
+                                                            <option value="Fixed">Fixed</option>
+                                                            <option value="Closed">Closed</option>
+                                                        </select>
+                                                    }
+                                                    else if (ViewBag.usertype == "Tester")
+                                                    {
+                                                        <select asp-for="status" class="form-control custom-select">
+                                                            <option value="Fixed">Fixed</option>
+
+                                                        </select>
+                                                    }
+                                                    else if (ViewBag.usertype == "Developer")
+                                                    {
+
+                                                        <select asp-for="status" class="form-control custom-select">
+
+                                                            <option value="Rejected">Rejected</option>
+                                                            <option value="Duplicate">Duplicate</option>
+                                                            <option value="Deferred">Deferred</option>
+                                                            <option value="Not Reproducible">Not Reproducible</option>
+                                                            <option value="Need more information">Need more information</option>
+                                                            <option value="Known defect">Known defect</option>
+                                                            <option value="Fixed">Fixed</option>
+                                                            <option value="Ready for Retest">Ready for Retest</option>
+
+                                                        </select>
+
+                                                    }
+
+                                                    <span asp-validation-for="status" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            @if (ViewBag.usertype == "Manager" || ViewBag.usertype == "Admin")
+                                            {
+                                                <div class="form-group row">
+                                                    <label asp-for="assign_to" class="control-label text-right col-md-3">Team Member</label>
+                                                    <div class="col-md-9">
+                                                        @Html.DropDownListFor(model => model.assign_to, ViewBag.NameList as SelectList, null, new { @class = "form-control", onChange = "SelectedValue(this)" })
+
+
+                                                        <span asp-validation-for="assign_to" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                            <div class="form-group row" hidden>
+                                                <label asp-for="user_id" class="control-label text-right col-md-3">User ID</label>
+                                                <div class="col-md-9">
+                                                    <input asp-for="user_id" class="form-control" type="hidden" value="@ViewBag.id" />
+
+                                                    <span asp-validation-for="user_id" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-actions">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="offset-sm-3 col-md-9">
+                                                                <input type="submit" value="Update" class="btn btn-success" />
+                                                                <input type="reset" value="Reset" class="btn btn-inverse" />
+
+                                                                <a asp-action="Index" class="btn btn-inverse">Back to List</a>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+        <script>
+            $('input[type=submit]').click(function () {
+                alert("Record updated successfully");
+            })
+        </script>
+
+        <script>
+            //To get selected value an text of dropdownlist
+            function SelectedValue(ddlObject) {
+                //Selected value of dropdownlist
+                var selectedValue = ddlObject.value;
+                //Selected text of dropdownlist
+                var selectedText = ddlObject.options[ddlObject.selectedIndex].innerHTML;
+
+                //alert popup with detail of seleceted value and text
+                //alert(" Selected Value: " + selectedValue + " -- " + "Selected Text: " + selectedText);
+            }
+        </script>
+
+        <script>
+
+            var status = $('#status').val();
+            var user = "@ViewBag.usertype";
+            if (status == "Fixed" || status == "Ready for Retest"  ) {
+                if (user == "Admin" || user == "Manager" || user == "Tester") {
+                    $("#status option[value='Open']").remove();
+                    $("#status option[value='New']").remove();
+
+                    $("#status option[value='Assigned']").remove();
+                    $('#status').append('<option value="Closed">Closed</option>');
+                    $('#status').append('<option value="Reopened">Reopened</option>');
+                }
+            }
+            if (status == "Closed" ) {
+                if (user == "Admin" || user == "Manager" || user == "Tester") {
+                    $("#status option[value='Open']").remove();
+                    $("#status option[value='Assigned']").remove();
+                    $("#status option[value='Rejected']").remove();
+                    $("#status option[value='Duplicate']").remove();
+                    $("#status option[value='Deferred']").remove();
+                    $("#status option[value='Not Reproducible']").remove();
+                    $("#status option[value='Need more information']").remove();
+                    $("#status option[value='Known defect']").remove();
+                    $("#status option[value='Fixed']").remove();
+                    $("#status option[value='Ready for Retest']").remove();
+                    $("#status option[value='New']").remove();
+                }
+            }
+            if (status == "Open") {
+                if (user == "Admin" || user == "Manager" || user == "Tester") {
+                    $("#status option[value='Closed']").remove();
+                    $("#status option[value='New']").remove();
+
+                    $("#status option[value='Fixed']").remove();
+
+                }
+            }
+
+            if (status == "New") {
+                if (user == "Admin" || user == "Manager" || user == "Tester") {
+                    $("#status option[value='Closed']").remove();
+                   
+
+                    $("#status option[value='Fixed']").remove();
+
+                }
+            }
+
+
+        </script>

@@ -1,0 +1,188 @@
+﻿@model IEnumerable<FinalDefect.Models.UsersModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+   
+}
+
+    <style>
+        a {
+            color: white;
+        }
+    </style>
+    <div class="page-wrapper">
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h3 class="text-themecolor">Users</h3>
+            </div>
+            <div class="col-md-7 align-self-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)" style="color:#67757c;">Home</a></li>
+                    <li class="breadcrumb-item">Users</li>
+
+                </ol>
+            </div>
+           
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-header">
+                            @if (ViewBag.usertype == "Admin")
+                            {
+                                <a asp-action="Create" class="btn btn-success">Create New</a>
+                            }
+
+                        </div>
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            @if (ViewBag.usertype == "Admin")
+                                            {
+                                                <h4 class="card-title">ALL USER DETAILS  </h4>
+                                            }
+                                            else if (ViewBag.usertype == "Developer")
+                                            {
+                                                <h4 class="card-title">ALL TESTERS DETAILS  </h4>
+                                            }
+                                            else if (ViewBag.usertype == "Tester")
+                                            {
+                                                <h4 class="card-title">ALL DEVELOPERS DETAILS  </h4>
+                                            }
+                                            else if (ViewBag.usertype == "Manager")
+                                            {
+                                                <h4 class="card-title">ALL TESTER AND DEVELOPERS DETAILS  </h4>
+                                            }
+
+                                            <hr />
+                                            <div class="table-responsive m-t-40">
+                                                <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                @Html.DisplayNameFor(model => model.id)
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayNameFor(model => model.firstname)
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayNameFor(model => model.lastname)
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayNameFor(model => model.phone)
+                                                            </th>
+
+                                                            <th>
+                                                                @Html.DisplayNameFor(model => model.email)
+                                                            </th>
+
+
+                                                            @if (ViewBag.usertype == "Admin")
+                                                            {
+                                                                <th>Edit</th>
+                                                            }
+
+
+                                                            <th>View</th>
+
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.id)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.firstname)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.lastname)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.phone)
+                                                                </td>
+
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.email)
+                                                                </td>
+
+
+                                                                @if (ViewBag.usertype == "Admin")
+                                                                {
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-info" })
+                                                                    </td>
+                                                                }
+
+                                                                <td>
+                                                                    @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-primary" })
+
+
+                                                                </td>
+
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script src="~/Admin/assets/plugins/jquery/jquery.min.js"></script>
+
+                    <script>
+
+
+                        $(document).ready(function () {
+
+
+
+                            $('#example23').DataTable({
+
+                                dom: 'Bfrtip',
+
+                                buttons: [
+
+                                    'copy', 'csv', 'excel', 'pdf', 'print'
+
+                                ]
+
+
+                            });
+
+                        })
+
+
+                    </script>
+
+
+
+
+                    <!-- The Modal -->
+
+
+
+

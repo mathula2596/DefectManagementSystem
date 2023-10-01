@@ -1,0 +1,72 @@
+﻿@using System.Security.Claims
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Admin/assets/images/favicon.png">
+    <title>Infinity Solutions</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Admin/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/Admin/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="~/Admin/css/colors/blue.css" id="theme" rel="stylesheet">
+   
+</head>
+<body background="~/Admin/assets/images/background/login-register.jpg">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+ 
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <section id="wrapper">
+        <div class="login-register" style="background-image:url(/Admin/assets/images/background/login-register.jpg")>
+            <div class="login-box card">
+                <div class="card-body">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="~/Admin/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/Admin/assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="~/Admin/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="~/Admin/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="~/Admin/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/Admin/js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="~/Admin/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="~/Admin/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/Admin/js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+    <script src="~/Admin/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+</body>
+
+</html>

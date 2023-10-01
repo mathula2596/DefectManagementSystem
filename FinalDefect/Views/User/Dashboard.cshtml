@@ -1,0 +1,174 @@
+﻿@model FinalDefect.Models.UsersModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+
+
+
+<style>
+    a {
+        color: white;
+    }
+</style>
+<div class="page-wrapper">
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Users</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)" style="color:#67757c;">Home</a></li>
+                <li class="breadcrumb-item">Users</li>
+
+            </ol>
+        </div>
+       
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+
+                    <div class="card-header">
+                        <a asp-action="Create" class="btn btn-success">Create New</a>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title"> USER DETAILS</h4>
+                                        <hr />
+                                        <div class="table-responsive m-t-40">
+                                            <table id="example23" class="table color-table purple-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Details
+                                                        </th>
+                                                        <th>
+                                                            Value
+                                                        </th>
+                                                    </tr>
+
+
+                                                </thead>
+
+                                                <tbody>
+
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayNameFor(model => model.id)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(model => model.id)
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayNameFor(model => model.usertype)
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(model => model.usertype)
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayNameFor(model => model.firstname)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(model => model.firstname)
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayNameFor(model => model.lastname)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(model => model.lastname)
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayNameFor(model => model.phone)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(model => model.phone)
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayNameFor(model => model.email)
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(model => model.email)
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayNameFor(model => model.address)
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(model => model.address)
+                                                        </td>
+
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayNameFor(model => model.status)
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(model => model.status)
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayNameFor(model => model.username)
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(model => model.username)
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                                <tfoot>
+
+                                                </tfoot>
+                                            </table>
+                                            <tr>
+                                                <td>
+                                                    <a asp-action="Index" class="btn btn-inverse">Back to List</a>
+
+                                                </td>
+
+
+
+                                            </tr>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>

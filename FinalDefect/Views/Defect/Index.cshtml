@@ -1,0 +1,143 @@
+﻿@model IEnumerable<FinalDefect.Models.DefectModel>
+
+    @{
+        ViewData["Title"] = "Index";
+        Layout = "~/Views/Shared/_PanelLayout.cshtml";
+    }
+
+                      <style>
+                          a {
+                              color: white;
+                          }
+                      </style>
+    <div class="page-wrapper">
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h3 class="text-themecolor">Defect</h3>
+            </div>
+            <div class="col-md-7 align-self-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)" style="color:#67757c;">Home</a></li>
+                    <li class="breadcrumb-item">Defect</li>
+
+                </ol>
+            </div>
+          
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+          
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-header">
+                            @if(ViewBag.usertype == "Admin" || ViewBag.usertype == "Tester")
+                            {
+                            <a asp-action="Create" class="btn btn-success">Create New</a>
+                            }
+                            
+                        </div>
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title">ALL DEFECT DETAILS</h4>
+                                            <hr />
+                                            <div class="table-responsive m-t-40">
+                                                <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                @Html.DisplayNameFor(model => model.id)
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayNameFor(model => model.project_name)
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayNameFor(model => model.description)
+                                                            </th>
+                                                            
+                                                            <th>
+                                                                @Html.DisplayNameFor(model => model.status)
+                                                            </th>
+                                                         
+                                                            <th>Edit</th>
+                                                            <th>View</th>
+
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        @foreach (var item in Model)
+                                                        {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.id)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.project_name)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.description)
+                                                            </td>
+                                                            
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.status)
+                                                            </td>
+                                                           
+
+                                                            <td>
+                                                                @Html.ActionLink("Edit", "Edit", new {id=item.id}, new { @class = "btn btn-info" })
+                                                            </td>
+                                                            <td>
+                                                                @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-primary" })
+                                                            </td>
+
+                                                        </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script src="~/Admin/assets/plugins/jquery/jquery.min.js"></script>
+                    <script src=".~/Admin/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+                    <script>
+
+
+                    $(document).ready(function () {
+
+
+
+                        $('#example23').DataTable({
+
+                            dom: 'Bfrtip',
+
+                            buttons: [
+
+                                'copy', 'csv', 'excel', 'pdf', 'print'
+
+                            ]
+
+
+                        });
+                    })
+
+
+                    </script>

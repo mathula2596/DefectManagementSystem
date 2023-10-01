@@ -1,0 +1,236 @@
+﻿@model FinalDefect.Models.DefectModel
+
+
+@{
+   // ViewData["assign_to"] = new SelectList("id","firstname");
+
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Defect</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item">Defect</li>
+
+            </ol>
+        </div>
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card card-outline-info">
+                                    <div class="card-header">
+                                        <h4 class="m-b-0 text-white">DEFECT RECORDS CREATION</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <form asp-action="Create" class="form-horizontal form-bordered">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                            <div class="form-group row">
+                                                <label asp-for="project_name" class="control-label text-right col-md-3">Project Name</label>
+                                                <div class="col-md-9">
+                                                    <input asp-for="project_name" class="form-control" type="text" />
+                                                    <span asp-validation-for="project_name" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label asp-for="description" class="control-label text-right col-md-3">Description</label>
+                                                <div class="col-md-9">
+                                                    <textarea asp-for="description" class="form-control" rows="6"></textarea>
+
+                                                    <span asp-validation-for="description" class="text-danger"></span>
+                                                </div>
+                                            </div>
+
+
+                                            @if (ViewBag.usertype == "Admin")
+                                            {
+                                            <div class="form-group row">
+
+
+
+                                                <label asp-for="status" class="control-label text-right col-md-3">Status</label>
+                                                <div class="col-md-9">
+                                                    <select asp-for="status" class="form-control custom-select">
+                                                        <option value="New">New</option>
+                                                        <option value="Open">Open</option>
+                                                        <option value="Assigned">Assigned</option>
+                                                      
+                                                    </select>
+                                                    <span asp-validation-for="status" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            }
+                                            else if (ViewBag.usertype == "Manager")
+                                            {
+                                            <div class="form-group row">
+
+
+                                                <label asp-for="status" class="control-label text-right col-md-3">Status</label>
+                                                <div class="col-md-9">
+
+                                                    <select asp-for="status" class="form-control custom-select">
+                                                       
+                                                        <option value="Open">Open</option>
+                                                        <option value="Assigned">Assigned</option>
+                                                      
+                                                    </select>
+                                                    <span asp-validation-for="status" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            }
+                                            else if (ViewBag.usertype == "Tester")
+                                            {
+                                            <div class="form-group row" hidden>
+
+
+                                                <label asp-for="status" class="control-label text-right col-md-3" hidden>Status</label>
+
+                                                <div class="col-md-9">
+                                                    <select asp-for="status" class="form-control custom-select" hidden>
+
+                                                        <option value="New">New</option>
+
+                                                    </select>
+                                                    <span asp-validation-for="status" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            }
+                                            else if (ViewBag.usertype == "Developer")
+                                            {
+                                            <div class="form-group row">
+
+
+
+                                                <label asp-for="status" class="control-label text-right col-md-3">Status</label>
+                                                <div class="col-md-9">
+                                                    <select asp-for="status" class="form-control custom-select">
+                                                        <option value="New">New</option>
+                                                        <option value="Rejected">Rejected</option>
+                                                        <option value="Duplicate">Duplicate</option>
+                                                        <option value="Deferred">Deferred</option>
+                                                        <option value="Not Reproducible">Not Reproducible</option>
+                                                        <option value="Need more information">Need more information</option>
+                                                        <option value="Known defect">Known defect</option>
+                                                        <option value="Fixed">Fixed</option>
+                                                        <option value="Ready for Retest">Ready for Retest</option>
+
+                                                    </select>
+                                                    <span asp-validation-for="status" class="text-danger"></span>
+                                                </div>
+                                            </div>
+
+                                            }
+
+
+
+                                            @if (ViewBag.usertype == "Admin")
+                                            {
+                                                <div class="form-group row">
+                                                    <label asp-for="assign_to" class="control-label text-right col-md-3">Team Member</label>
+                                                    <div class="col-md-9">
+                                                        @*ViewBag.CityList is holding all the cities values*@
+                                                        @Html.DropDownListFor(model => model.assign_to, (IEnumerable<SelectListItem>)ViewBag.NameList as SelectList, "Please Select", new { @class = "form-control", onChange = "SelectedValue(this)" })
+
+                                                        @*Html.DropDownList("SelectedItem",new SelectList(ViewBag.SelectedItem,"Value","Text",ViewBag.SelectedItem),new { onchange = "form.submit();"})*@
+                                                        @* <select asp-for="assign_to" class="form-control">
+
+                        <option value="Open">Open</option>
+                        <option value="Assigned">
+                            @if (ViewBag.name != null)
+                            {
+
+                                @foreach (var val in ViewBag.name)
+                                {
+                                    @val
+                                }
+                            }
+                            else
+                            {
+                                @ViewBag.username;
+                            }
+                        </option>
+                    </select>*@
+
+                                                        <span asp-validation-for="assign_to" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                            <div class="form-group row" hidden>
+                                                <label asp-for="user_id" class="control-label text-right col-md-3">User ID</label>
+                                                <div class="col-md-9">
+
+                                                    <input asp-for="user_id" class="form-control" type="hidden" value="@ViewBag.id" />
+
+                                                    <span asp-validation-for="user_id" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-actions">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="offset-sm-3 col-md-9">
+                                                                <input type="submit" value="Create" class="btn btn-success" />
+                                                                <input type="reset" value="Reset" class="btn btn-inverse" />
+
+                                                                <a asp-action="Index" class="btn btn-inverse">Back to List</a>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+        <script>
+            $('input[type=submit]').click(function () {
+                alert("Record added successfully");
+            })
+        </script>
+
+        <script>
+            //To get selected value an text of dropdownlist
+            function SelectedValue(ddlObject) {
+                //Selected value of dropdownlist
+                var selectedValue = ddlObject.value;
+                //Selected text of dropdownlist
+                var selectedText = ddlObject.options[ddlObject.selectedIndex].innerHTML;
+
+                //alert popup with detail of seleceted value and text
+                //alert(" Selected Value: " + selectedValue + " -- " + "Selected Text: " + selectedText);
+            }
+        </script>
+
